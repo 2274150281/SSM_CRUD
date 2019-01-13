@@ -1,0 +1,3 @@
+*.java linguist_language = java
+*.xml linguist_language = java
+*.jsp linguist_language = java
