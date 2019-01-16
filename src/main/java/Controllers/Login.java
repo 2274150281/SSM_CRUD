@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@SessionAttributes("userType,user")
+@SessionAttributes({"userType","user","goods"})
 public class Login {
 
     @Autowired
@@ -29,6 +29,7 @@ public class Login {
         //这里不能使用@SessionAttribute注解，因为第一次用户还没登录的时候Session是空的，这样就会报错
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) httpSession.getAttribute("user");
+        httpSession.removeAttribute("userType");
         String userType = "normal";
         modelAndView.addObject("userType",userType);   //与上面@SessionAttributes注解对应的是model中的属性名，也就是第一个参数。
 

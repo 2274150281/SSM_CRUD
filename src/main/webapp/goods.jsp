@@ -16,6 +16,9 @@
 </head>
 <body>
 <h1 align="center">商品列表</h1>
+<%--这两行代码用于debug的时候查看reque和session的值--%>
+<%--request:${requestScope.goods}<br>
+session:${sessionScope.goods}--%>
 <table align="center" style="border: 1px;width: 100%">
     <tr>
         <td>名称</td>
@@ -23,7 +26,7 @@
         <td>价格</td>
         <td>操作</td>
     </tr>
-    <c:forEach items="${requestScope.goods}" var="good">
+    <c:forEach items="${requestScope.goods != null?requestScope.goods:sessionScope.goods}" var="good">
         <tr>
             <td>${good.name}</td>
             <td>${good.description}</td>

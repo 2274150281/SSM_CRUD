@@ -2,20 +2,16 @@ package Controllers;
 
 import Services.GoodOperationService;
 import Services.GoodService;
-import beans.Good;
+import beans.PoorException;
 import beans.User;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
-@SessionAttributes("goods")
 public class GoodsOperation {
 
     @Autowired
@@ -23,19 +19,17 @@ public class GoodsOperation {
     @Autowired
     GoodOperationService goodOperationService;
 
-    @RequestMapping("/but,action")
-    public ModelAndView buy(@Param("id")int id, @SessionAttribute("user") User user){
+    @RequestMapping("/buy.action")
+    public ModelAndView buy(@RequestParam("id")Integer goodId, @SessionAttribute("user") User user){
         ModelAndView modelAndView = new ModelAndView();
-        Float money = user.getMoney();
-        Float price = goodService.getGood(id).getPrice();
+        int userId = user.getId();
+        float price = goodService.getPrice(goodId);
 
-        if(money < price){
+        try{
+            goodOperationService.buy(userId,goodId,price);
+            modelAndView.setViewName("purchaseSuccess.jsp");
+        }catch (PoorException e){
             modelAndView.setViewName("poor.jsp");
-        }else{
-            goodOperationService.buy();
-            List<Good> goods = goodService.getGoods();
-            modelAndView.addObject("goods",goods);
-            modelAndView.setViewName("goods.jsp");
         }
 
         return modelAndView;

@@ -6,6 +6,7 @@ public class Good {
     public String name;
     public float price;
     public String description;
+    public int number;
 
     @Override
     public String toString() {
@@ -14,7 +15,16 @@ public class Good {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", number=" + number +
                 '}';
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public int getId() {

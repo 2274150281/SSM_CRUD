@@ -11,4 +11,7 @@ public interface UserMapper {
     @Select("select money from user where id = #{id}")
     Float getMoney(int id);
 
+    @Select("update user set money = #{param2} where id = #{param1}")
+    void setMoney(int id,float money);
+
 }

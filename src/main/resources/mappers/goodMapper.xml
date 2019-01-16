@@ -10,5 +10,17 @@
     <select id="getGoods" resultType="beans.Good">
         select * from good
     </select>
+    <update id="setPrice">
+        update good set price = #{param2} where id = #{param1}
+    </update>
+    <select id="getPrice" resultType="float">
+        select price from good where id = #{id}
+    </select>
+    <select id="getNumber" resultType="int">
+        select number from good where id = #{id}
+    </select>
+    <update id="setNumber">
+        update good set number = #{arg1} where id = #{arg0}
+    </update>
 </mapper>
     

@@ -20,4 +20,20 @@ public class GoodService {
         return goodMapper.getGood(id);
     }
 
+    public float getPrice(int id){
+        return goodMapper.getPrice(id);
+    }
+
+    public void setPrice(int id,float price){
+        goodMapper.setPrice(id,price);
+    }
+
+    public void setNumber(int id, int number){
+        goodMapper.setNumber(id,number);
+    }
+
+    public int getNumber(int id){
+        return goodMapper.getNumber(id);
+    }
+
 }
