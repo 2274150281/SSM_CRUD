@@ -1,13 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="beans.Good" %>
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
-<%@ page import="DAO.GoodMapper" %><%--
-  Created by IntelliJ IDEA.
-  User: Scholar
-  Date: 2019/1/9
-  Time: 14:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -19,6 +9,7 @@
 <%--这两行代码用于debug的时候查看reque和session的值--%>
 <%--request:${requestScope.goods}<br>
 session:${sessionScope.goods}--%>
+<h2 align="center"><a href="index.jsp">Home Page</a> </h2> <a style="position: center" href="logout.action">注销</a>
 <table align="center" style="border: 1px;width: 100%">
     <tr>
         <td>名称</td>

@@ -3,17 +3,17 @@
 <html>
 <head></head>
 <body>
-<h2>商城</h2>
+<h1 align="center">商城</h1>
 <%--这两行代码用于debug的时候查看request和session中的值--%>
-<%--request:${requestScope.user}<br>
-session:${sessionScope.user}--%>
+request:${requestScope.user}<br>
+session:${sessionScope.user}
 <div align="center">
     <c:choose>
-        <c:when test="session.user">
+        <c:when test="${sessionScope.user != null}">
             您已登录，可以<a href="goods.jsp">查看商品</a>
         </c:when>
-        <c:when test="session.administrator">
-            您以登录，可以<a href="goods.jsp">上架\下架商品</a>
+        <c:when test="${sessionScope.administrator != null}">
+            您已登录，可以<a href="goods.jsp">上架\下架商品</a>
         </c:when>
         <c:otherwise>
             <a href="login.jsp">登录</a>  <a href="adminLogin.jsp">管理员登录</a>

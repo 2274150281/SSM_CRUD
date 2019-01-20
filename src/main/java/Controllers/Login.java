@@ -5,6 +5,8 @@ import Services.LoginService;
 import beans.Good;
 import beans.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import java.util.List;
 @SessionAttributes({"userType","user","goods"})
 public class Login {
 
+    private static final Logger logger = (Logger) LogManager.getLogger(Login.class);
+
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -30,14 +34,17 @@ public class Login {
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) httpSession.getAttribute("user");
         httpSession.removeAttribute("userType");
+        logger.info("Get user and userType from session");
         String userType = "normal";
         modelAndView.addObject("userType",userType);   //与上面@SessionAttributes注解对应的是model中的属性名，也就是第一个参数。
 
         if(httpSession.getAttribute("administrator") != null)
             httpSession.setAttribute("administrator",null);
+        logger.info("Clear administrator in session");
 
         if(user == null) {
             int validation = loginService.valid(username, password);
+            logger.info("Check user in session");
             if (validation == 1){
                 modelAndView.setViewName("goods.jsp");
                 List<Good> goods = goodService.getGoods();
@@ -53,6 +60,7 @@ public class Login {
         }else{
             modelAndView.setViewName("logined.jsp");
         }
+        logger.info("Set corresponding jsp page for check results");
         return modelAndView;
     }
 
